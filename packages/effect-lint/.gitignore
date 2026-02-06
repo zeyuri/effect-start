@@ -1,0 +1,7 @@
+node_modules/
+.oxlintcache/
+.DS_Store
+dist/
+coverage/
+tmp/
+*.log

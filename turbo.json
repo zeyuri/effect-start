@@ -1,0 +1,36 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".output/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", ".oxlintrc.json", "../../.oxlintrc.json"]
+    },
+    "format": {
+      "cache": false
+    },
+    "format:check": {
+      "inputs": ["$TURBO_DEFAULT$", "../../.oxfmtrc.json"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"],
+      "outputs": [".tsbuildinfo/**"]
+    },
+    "test": {
+      "dependsOn": ["@starter/ui#build", "@starter/vitest-config#build"],
+      "outputs": ["coverage.json", "coverage/**"]
+    },
+    "test:e2e": {
+      "cache": false
+    }
+  }
+}

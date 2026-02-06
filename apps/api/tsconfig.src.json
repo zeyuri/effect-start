@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": ".tsbuildinfo/src.tsbuildinfo",
+    "paths": {
+      "@starter/core/*": ["../../packages/core/src/*"],
+      "@starter/persistence/*": ["../../packages/persistence/src/*"],
+      "@starter/api-contract/*": ["../../packages/api-contract/src/*"]
+    }
+  },
+  "references": [
+    { "path": "../../packages/core/tsconfig.src.json" },
+    { "path": "../../packages/persistence/tsconfig.src.json" },
+    { "path": "../../packages/api-contract/tsconfig.src.json" }
+  ]
+}

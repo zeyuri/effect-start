@@ -1,0 +1,40 @@
+{
+  "jsPlugins": [
+    "../src/index.js"
+  ],
+  "rules": {
+    "effect/no-unnecessary-pipe-wrapper": "error",
+    "effect/no-eta-expansion": "error",
+    "effect/no-unnecessary-function-alias": "warn",
+    "effect/prefer-match-tag": "error",
+    "effect/prefer-match-over-conditionals": "error",
+    "effect/prefer-match-over-ternary": "error",
+    "effect/prefer-effect-if-over-match-boolean": "error",
+    "effect/prefer-schema-validation-over-assertions": "error",
+    "effect/prefer-as-void": "error",
+    "effect/prefer-as-some": "error",
+    "effect/prefer-as-some-error": "error",
+    "effect/prefer-flatten": "error",
+    "effect/prefer-zip-left": "error",
+    "effect/prefer-zip-right": "error",
+    "effect/prefer-ignore": "error",
+    "effect/prefer-ignore-logged": "error",
+    "effect/prefer-from-nullable": "error",
+    "effect/prefer-get-or-else": "error",
+    "effect/prefer-get-or-null": "error",
+    "effect/prefer-get-or-undefined": "error",
+    "effect/prefer-succeed-none": "error",
+    "effect/no-effect-if-option-check": "error",
+    "effect/suggest-currying-opportunity": "warn",
+    "effect/no-classes": "error",
+    "effect/no-runSync": "error",
+    "effect/no-runPromise": "error",
+    "effect/prefer-andThen": "error",
+    "effect/prefer-as": "error",
+    "effect/prefer-effect-platform": "error",
+    "effect/no-method-pipe": "error",
+    "effect/no-curried-calls": "error",
+    "effect/no-identity-transform": "error",
+    "effect/no-pipe-first-arg-call": "error"
+  }
+}

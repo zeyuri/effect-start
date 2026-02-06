@@ -1,0 +1,28 @@
+{
+  "name": "@starter/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./todo/TodoId": "./src/todo/TodoId.ts",
+    "./todo/Todo": "./src/todo/Todo.ts",
+    "./todo/CreateTodoInput": "./src/todo/CreateTodoInput.ts",
+    "./todo/UpdateTodoInput": "./src/todo/UpdateTodoInput.ts"
+  },
+  "scripts": {
+    "test": "vitest --run",
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint --type-aware -c ../../.oxlintrc.json src/",
+    "format": "oxfmt -c ../../.oxfmtrc.json --write src/",
+    "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/"
+  },
+  "dependencies": {
+    "effect": "catalog:"
+  },
+  "devDependencies": {
+    "@starter/vitest-config": "workspace:*",
+    "@effect/vitest": "catalog:",
+    "@effect/language-service": "catalog:",
+    "typescript": "catalog:"
+  }
+}

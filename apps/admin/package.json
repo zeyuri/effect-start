@@ -1,0 +1,38 @@
+{
+  "name": "@starter/admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "oxlint --type-aware -c ../../.oxlintrc.json src/",
+    "format": "oxfmt -c ../../.oxfmtrc.json --write src/",
+    "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/",
+    "check-types": "tsc --noEmit",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@effect-atom/atom": "^0.5.0",
+    "@effect-atom/atom-react": "^0.5.0",
+    "@starter/api-contract": "workspace:*",
+    "@effect/platform": "catalog:",
+    "@effect/platform-browser": "^0.74.0",
+    "@tanstack/react-router": "catalog:",
+    "effect": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@effect/language-service": "catalog:",
+    "@playwright/test": "^1.58.2",
+    "@tanstack/router-plugin": "^1.147.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-tsconfig-paths": "catalog:"
+  }
+}

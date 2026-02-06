@@ -1,0 +1,15 @@
+node_modules
+dist
+.turbo
+.output
+.nitro
+.tanstack
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage.json
+coverage/
+playwright-report/
+test-results/

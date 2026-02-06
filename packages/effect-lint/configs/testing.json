@@ -1,0 +1,10 @@
+{
+  "jsPlugins": [
+    "../src/index.js"
+  ],
+  "rules": {
+    "effect/no-runPromise-in-tests": "error",
+    "effect/no-runSync-in-tests": "error",
+    "effect/prefer-effect-assertions": "warn"
+  }
+}

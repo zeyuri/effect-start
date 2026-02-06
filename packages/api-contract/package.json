@@ -1,0 +1,26 @@
+{
+  "name": "@starter/api-contract",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./TodoSchema": "./src/TodoSchema.ts",
+    "./TodosApi": "./src/TodosApi.ts",
+    "./AppApi": "./src/AppApi.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint --type-aware -c ../../.oxlintrc.json src/",
+    "format": "oxfmt -c ../../.oxfmtrc.json --write src/",
+    "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/"
+  },
+  "dependencies": {
+    "@starter/core": "workspace:*",
+    "effect": "catalog:",
+    "@effect/platform": "catalog:"
+  },
+  "devDependencies": {
+    "@effect/language-service": "catalog:",
+    "typescript": "catalog:"
+  }
+}

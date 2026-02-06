@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["test"],
+  "references": [
+    { "path": "tsconfig.src.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": true,
+    "rootDir": "test",
+    "tsBuildInfoFile": ".tsbuildinfo/test.tsbuildinfo",
+    "rewriteRelativeImportExtensions": false,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@starter/core/*": ["../../packages/core/src/*"],
+      "@starter/persistence/*": ["../../packages/persistence/src/*"],
+      "@starter/api-contract/*": ["../../packages/api-contract/src/*"]
+    }
+  }
+}

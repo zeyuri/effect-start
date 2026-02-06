@@ -1,0 +1,10 @@
+{
+  "jsPlugins": [
+    "../src/index.js"
+  ],
+  "rules": {
+    "effect/no-direct-tag-access": "error",
+    "effect/no-switch-statement": "error",
+    "effect/no-if-statement": "error"
+  }
+}
