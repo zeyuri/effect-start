@@ -1,6 +1,7 @@
-import * as SqlClient from "@effect/sql/SqlClient";
+import * as SqlClient from "effect/unstable/sql/SqlClient";
 import * as Effect from "effect/Effect";
 import { pipe } from "effect/Function";
+import * as Layer from "effect/Layer";
 import {
   type PersistenceError,
   wrapSqlError,
@@ -66,4 +67,6 @@ const program = Effect.gen(function* () {
 });
 
 // eslint-disable-next-line effect/no-runPromise -- CLI entry point
-void Effect.runPromise(Effect.provide(program, PgClientLive));
+void Effect.runPromise(
+  Layer.launch(Layer.provide(Layer.effectDiscard(program), PgClientLive))
+);

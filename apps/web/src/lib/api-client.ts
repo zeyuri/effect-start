@@ -1,7 +1,7 @@
 import { AppApi } from "@starter/api-contract/AppApi";
-import * as HttpApiClient from "@effect/platform/HttpApiClient";
-import * as HttpClient from "@effect/platform/HttpClient";
-import * as Context from "effect/Context";
+import * as HttpApiClient from "effect/unstable/httpapi/HttpApiClient";
+import * as HttpClient from "effect/unstable/http/HttpClient";
+import * as ServiceMap from "effect/ServiceMap";
 import * as Effect from "effect/Effect";
 import { pipe } from "effect/Function";
 import * as Layer from "effect/Layer";
@@ -26,10 +26,11 @@ const apiClient = Effect.gen(function* () {
   return { http };
 });
 
-type ApiClientShape = Effect.Effect.Success<typeof apiClient>;
+type ApiClientShape = Effect.Success<typeof apiClient>;
 
-export class ApiClient extends Context.Tag(
-  "@starter/web/lib/api-client/ApiClient"
-)<ApiClient, ApiClientShape>() {}
+export class ApiClient extends ServiceMap.Service<
+  ApiClient,
+  ApiClientShape
+>()("@starter/web/lib/api-client/ApiClient") {}
 
-export const ApiClientLive = Layer.scoped(ApiClient, apiClient);
+export const ApiClientLive = Layer.effect(ApiClient)(apiClient);

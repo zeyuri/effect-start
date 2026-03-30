@@ -1,4 +1,4 @@
-import * as Context from "effect/Context";
+import * as ServiceMap from "effect/ServiceMap";
 import * as Effect from "effect/Effect";
 import type { Todo } from "@starter/core/todo/Todo";
 import type { TodoId } from "@starter/core/todo/TodoId";
@@ -26,6 +26,7 @@ export interface TodoRepositoryService {
   ) => Effect.Effect<void, EntityNotFoundError | PersistenceError>;
 }
 
-export class TodoRepository extends Context.Tag(
-  "@starter/persistence/Services/TodoRepository"
-)<TodoRepository, TodoRepositoryService>() {}
+export class TodoRepository extends ServiceMap.Service<
+  TodoRepository,
+  TodoRepositoryService
+>()("@starter/persistence/Services/TodoRepository") {}

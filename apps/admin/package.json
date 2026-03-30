@@ -14,11 +14,9 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@effect-atom/atom": "^0.5.0",
-    "@effect-atom/atom-react": "^0.5.0",
+    "@effect/atom-react": "4.0.0-beta.43",
     "@starter/api-contract": "workspace:*",
-    "@effect/platform": "catalog:",
-    "@effect/platform-browser": "^0.74.0",
+    "@effect/platform-browser": "4.0.0-beta.43",
     "@tanstack/react-router": "catalog:",
     "effect": "catalog:",
     "react": "catalog:",

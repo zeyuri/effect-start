@@ -1,5 +1,5 @@
-import * as SqlClient from "@effect/sql/SqlClient";
-import * as Context from "effect/Context";
+import * as SqlClient from "effect/unstable/sql/SqlClient";
+import * as ServiceMap from "effect/ServiceMap";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
 import { pipe } from "effect/Function";
@@ -12,15 +12,13 @@ import { migrations } from "../Migrations/index.ts";
 type MigrationResult = ReadonlyArray<readonly [number, string]>;
 type MigrationEffect = Effect.Effect<MigrationResult, PersistenceError>;
 
-export class Migrations extends Context.Tag(
-  "@starter/persistence/Layers/MigrationsLive/Migrations"
-)<
+export class Migrations extends ServiceMap.Service<
   Migrations,
   {
     readonly run: MigrationEffect;
     readonly runOnce: MigrationEffect;
   }
->() {}
+>()("@starter/persistence/Layers/MigrationsLive/Migrations") {}
 
 const makeRunMigrations = (sql: SqlClient.SqlClient): MigrationEffect => {
   const txn = sql.withTransaction(
@@ -62,12 +60,11 @@ const makeRunMigrations = (sql: SqlClient.SqlClient): MigrationEffect => {
 };
 
 export const runMigrations = Effect.flatMap(
-  SqlClient.SqlClient,
+  SqlClient.SqlClient.asEffect(),
   makeRunMigrations
 );
 
-export const MigrationsLive = Layer.effect(
-  Migrations,
+export const MigrationsLive = Layer.effect(Migrations)(
   Effect.gen(function* () {
     const sql = yield* SqlClient.SqlClient;
     const run = makeRunMigrations(sql);

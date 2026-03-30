@@ -17,7 +17,7 @@
     "db:setup": "bun run db:up && bun run db:migrate && bun run db:seed"
   },
   "devDependencies": {
-    "@effect/language-service": "^0.73.0",
+    "@effect/language-service": "^0.84.2",
     "@vitest/coverage-istanbul": "catalog:",
     "oxfmt": "^0.28.0",
     "oxlint": "^1.43.0",
@@ -32,20 +32,24 @@
     "packages/*"
   ],
   "catalog": {
-    "@effect/language-service": "^0.73.0",
+    "@effect/language-service": "^0.84.2",
+    "@effect/vitest": "4.0.0-beta.43",
     "@tanstack/react-router": "^1.147.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitest/coverage-istanbul": "^4.0.18",
+    "effect": "4.0.0-beta.43",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "tsdown": "^0.20.1",
     "typescript": "5.9.3",
     "vite": "^7.2.2",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "^4.0.18",
-    "@effect/vitest": "^0.27.0",
-    "effect": "^3.19.14",
-    "@effect/platform": "^0.94.1"
+    "vitest": "^4.0.18"
+  },
+  "overrides": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   }
 }

@@ -5,8 +5,9 @@ import {
   MigrationsLive,
 } from "@starter/persistence/Layers/MigrationsLive";
 import { RepositoriesLive } from "@starter/persistence/Layers/RepositoriesLive";
-import * as HttpLayerRouter from "@effect/platform/HttpLayerRouter";
-import * as HttpServerResponse from "@effect/platform/HttpServerResponse";
+import * as HttpApiBuilder from "effect/unstable/httpapi/HttpApiBuilder";
+import * as HttpRouter from "effect/unstable/http/HttpRouter";
+import * as HttpServerResponse from "effect/unstable/http/HttpServerResponse";
 import { BunHttpServer, BunRuntime } from "@effect/platform-bun";
 import * as Config from "effect/Config";
 import * as Effect from "effect/Effect";
@@ -16,7 +17,7 @@ import { TodosApiLive } from "./todos/TodosApiLive.js";
 
 const ServerLive = Layer.unwrapEffect(
   Effect.gen(function* () {
-    const port = yield* pipe("PORT", Config.integer, Config.withDefault(3000));
+    const port = yield* pipe("PORT", Config.int, Config.withDefault(3000));
     return BunHttpServer.layer({ port });
   })
 );
@@ -36,18 +37,18 @@ const RunMigrations = Layer.effectDiscard(
 
 const HttpApiRoutes = pipe(
   AppApi,
-  HttpLayerRouter.addHttpApi,
+  HttpApiBuilder.layer,
   Layer.provide(TodosApiLive),
   Layer.provide(RunMigrations),
   Layer.provide(PersistenceLive)
 );
 
-const HealthRoute = HttpLayerRouter.use((router) =>
+const HealthRoute = HttpRouter.use((router) =>
   router.add(
     "GET",
     "/health",
     Effect.sync(() =>
-      HttpServerResponse.unsafeJson({
+      HttpServerResponse.jsonUnsafe({
         status: "ok",
         timestamp: new Date().toISOString(),
       })
@@ -55,7 +56,7 @@ const HealthRoute = HttpLayerRouter.use((router) =>
   )
 );
 
-const CorsMiddleware = HttpLayerRouter.cors({
+const CorsMiddleware = HttpRouter.cors({
   allowedOrigins: [
     "http://localhost:3001",
     "http://localhost:3002",
@@ -71,7 +72,7 @@ const AllRoutes = pipe(
 
 pipe(
   AllRoutes,
-  HttpLayerRouter.serve,
+  HttpRouter.serve,
   Layer.provide(ServerLive),
   Layer.launch,
   BunRuntime.runMain

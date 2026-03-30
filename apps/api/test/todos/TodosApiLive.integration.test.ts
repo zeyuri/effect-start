@@ -32,8 +32,7 @@ const makeTodo = (title: string, id: string = crypto.randomUUID()) =>
 const createTestLayer = (initialTodos: ReadonlyArray<typeof Todo.Type> = []) => {
   const store = [...initialTodos];
 
-  return Layer.effect(
-    TodoRepository,
+  return Layer.effect(TodoRepository)(
     Effect.sync(() => {
       const service: TodoRepositoryService = {
         list: () => Effect.succeed([...store]),

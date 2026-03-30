@@ -1,8 +1,7 @@
-import { Result } from "@effect-atom/atom-react";
-import { HydrationBoundary } from "@effect-atom/atom-react/ReactHydration";
+import * as AsyncResult from "effect/unstable/reactivity/AsyncResult";
+import { HydrationBoundary } from "@effect/atom-react/ReactHydration";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import * as Effect from "effect/Effect";
 import { dehydrate } from "~/lib/atom-utils";
 import { Api } from "~/lib/api";
 import { serverRuntime } from "~/lib/server-runtime";
@@ -12,9 +11,9 @@ import { CreateTodoForm } from "./-lib/create-todo-form";
 
 const listTodos = createServerFn({ method: "GET" }).handler(async () => {
   const exit = await serverRuntime.runPromiseExit(
-    Effect.flatMap(Api, (api) => api.todos.list())
+    Api.use((api) => api.todos.list())
   );
-  return dehydrate(todosAtom.remote, Result.fromExit(exit));
+  return dehydrate(todosAtom.remote, AsyncResult.fromExit(exit));
 });
 
 export const Route = createFileRoute("/todos/")({

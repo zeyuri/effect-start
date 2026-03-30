@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { TodoIdType } from "@starter/api-contract/TodoSchema";
 import {
-  Result,
   useAtomRefresh,
   useAtomSet,
   useAtomValue,
-} from "@effect-atom/atom-react";
+} from "@effect/atom-react";
+import * as AsyncResult from "effect/unstable/reactivity/AsyncResult";
 import * as Exit from "effect/Exit";
 import * as Option from "effect/Option";
 import { useState } from "react";
@@ -54,7 +54,7 @@ function TodosPage() {
 
   const handleToggle = async (id: TodoIdType, completed: boolean) => {
     const exit = await updateTodo({
-      path: { id },
+      params: { id },
       payload: {
         title: Option.none(),
         completed: Option.some(!completed),
@@ -71,7 +71,7 @@ function TodosPage() {
   };
 
   const handleDelete = async (id: TodoIdType) => {
-    const exit = await removeTodo({ path: { id } });
+    const exit = await removeTodo({ params: { id } });
 
     if (Exit.isFailure(exit)) {
       setErrorMessage("Failed to delete todo.");
@@ -119,7 +119,7 @@ function TodosPage() {
           {errorMessage}
         </p>
       ) : null}
-      {Result.match(todos, {
+      {AsyncResult.match(todos, {
         onInitial: () => <p>Loading todos...</p>,
         onFailure: () => <p>Failed to load todos.</p>,
         onSuccess: (success) => (

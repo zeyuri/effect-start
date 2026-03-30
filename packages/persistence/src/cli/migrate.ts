@@ -17,7 +17,12 @@ const program = Effect.gen(function* () {
   yield* Effect.logInfo(`Applied migrations: ${names}.`);
 });
 
-const appLayer = Layer.provide(MigrationsLive, PgClientLive);
+const migrationsLayer = Layer.provide(MigrationsLive, PgClientLive);
+
+const appLayer = Layer.provide(
+  Layer.effectDiscard(program),
+  migrationsLayer
+);
 
 // eslint-disable-next-line effect/no-runPromise -- CLI entry point
-void Effect.runPromise(Effect.provide(program, appLayer));
+void Effect.runPromise(Layer.launch(appLayer));

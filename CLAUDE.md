@@ -43,7 +43,7 @@ Bun monorepo with Turborepo orchestration. Scope: `@starter/*`.
 
 **apps/api** - Effect HTTP backend on Bun runtime. Uses `@effect/platform` HttpApi with `HttpApiBuilder.group` handlers. Entry point: `src/main.ts`. Port 3000.
 
-**apps/web** - TanStack Start SSR app with Nitro server. File-based routing via TanStack Router in `src/routes/`. Entry point: `src/router.tsx`. Path alias `~/*` maps to `src/*`. Styled with Tailwind CSS v4. Uses `@effect-atom/atom-react` for reactive state. Port 3001.
+**apps/web** - TanStack Start SSR app with Nitro server. File-based routing via TanStack Router in `src/routes/`. Entry point: `src/router.tsx`. Path alias `~/*` maps to `src/*`. Styled with Tailwind CSS v4. Uses `@effect/atom-react` for reactive state. Port 3001.
 
 **apps/admin** - React SPA with TanStack Router (file-based). Entry point: `src/main.tsx` with `ReactDOM.createRoot()`. Standard Vite build, no SSR. Port 3002.
 
@@ -52,8 +52,6 @@ Bun monorepo with Turborepo orchestration. Scope: `@starter/*`.
 **packages/api-contract** - HTTP API contract: `TodosApiGroup`, `AppApi`, `TodoNotFound` error.
 
 **packages/persistence** - PostgreSQL persistence: `TodoRepository` service, `TodoRepositoryLive` layer, migrations, seeds, CLI tools. Uses `@effect/sql-pg` with `SqlSchema`.
-
-**packages/effect-lint** - Custom oxlint rules for Effect patterns.
 
 **packages/vitest-config** - Shared Vitest configuration.
 

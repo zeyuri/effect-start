@@ -4,12 +4,12 @@ import {
   type TodoIdType,
   type UpdateTodoInputType,
 } from "@starter/api-contract/TodoSchema";
-import * as Context from "effect/Context";
+import * as ServiceMap from "effect/ServiceMap";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
 import { ApiClient } from "./api-client";
 
-export class Api extends Context.Tag("@starter/web/lib/api")<
+export class Api extends ServiceMap.Service<
   Api,
   {
     readonly todos: {
@@ -24,10 +24,9 @@ export class Api extends Context.Tag("@starter/web/lib/api")<
       readonly remove: (id: TodoIdType) => Effect.Effect<void>;
     };
   }
->() {}
+>()("@starter/web/lib/api") {}
 
-export const ApiLive = Layer.effect(
-  Api,
+export const ApiLive = Layer.effect(Api)(
   Effect.gen(function* () {
     const { http } = yield* ApiClient;
 
@@ -37,9 +36,9 @@ export const ApiLive = Layer.effect(
         create: (input: CreateTodoInputType) =>
           Effect.orDie(http.todos.create({ payload: input })),
         update: (id: TodoIdType, input: UpdateTodoInputType) =>
-          Effect.orDie(http.todos.update({ path: { id }, payload: input })),
+          Effect.orDie(http.todos.update({ params: { id }, payload: input })),
         remove: (id: TodoIdType) =>
-          Effect.orDie(http.todos.remove({ path: { id } })),
+          Effect.orDie(http.todos.remove({ params: { id } })),
       },
     } as const;
   })

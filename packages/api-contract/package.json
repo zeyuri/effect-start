@@ -4,23 +4,37 @@
   "private": true,
   "type": "module",
   "exports": {
+    ".": "./src/index.ts",
+    "./AppApi": "./src/AppApi.ts",
     "./TodoSchema": "./src/TodoSchema.ts",
     "./TodosApi": "./src/TodosApi.ts",
-    "./AppApi": "./src/AppApi.ts"
+    "./ProductSchema": "./src/ProductSchema.ts",
+    "./ProductsApi": "./src/ProductsApi.ts",
+    "./OrderSchema": "./src/OrderSchema.ts",
+    "./OrdersApi": "./src/OrdersApi.ts",
+    "./CartSchema": "./src/CartSchema.ts",
+    "./CartsApi": "./src/CartsApi.ts",
+    "./CheckoutSchema": "./src/CheckoutSchema.ts",
+    "./CheckoutApi": "./src/CheckoutApi.ts",
+    "./AdminSchema": "./src/AdminSchema.ts",
+    "./AdminApi": "./src/AdminApi.ts",
+    "./FulfillmentSchema": "./src/FulfillmentSchema.ts",
+    "./FulfillmentApi": "./src/FulfillmentApi.ts",
+    "./ShippingSchema": "./src/ShippingSchema.ts",
+    "./WebhookSchema": "./src/WebhookSchema.ts",
+    "./WebhooksApi": "./src/WebhooksApi.ts"
   },
   "scripts": {
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc --noEmit -p tsconfig.src.json",
     "lint": "oxlint --type-aware -c ../../.oxlintrc.json src/",
     "format": "oxfmt -c ../../.oxfmtrc.json --write src/",
     "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/"
   },
   "dependencies": {
     "@starter/core": "workspace:*",
-    "effect": "catalog:",
-    "@effect/platform": "catalog:"
+    "effect": "catalog:"
   },
   "devDependencies": {
-    "@effect/language-service": "catalog:",
     "typescript": "catalog:"
   }
 }

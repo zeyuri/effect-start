@@ -1,4 +1,3 @@
-import * as HttpApiSchema from "@effect/platform/HttpApiSchema";
 import * as Schema from "effect/Schema";
 import { TodoId } from "@starter/core/todo/TodoId";
 
@@ -10,10 +9,10 @@ export type { CreateTodoInput as CreateTodoInputType } from "@starter/core/todo/
 export { UpdateTodoInput } from "@starter/core/todo/UpdateTodoInput";
 export type { UpdateTodoInput as UpdateTodoInputType } from "@starter/core/todo/UpdateTodoInput";
 
-export class TodoNotFoundError extends Schema.TaggedError<TodoNotFoundError>()(
+export class TodoNotFoundError extends Schema.TaggedErrorClass<TodoNotFoundError>()(
   "TodoNotFoundError",
   {
     id: TodoId,
   },
-  HttpApiSchema.annotations({ status: 404 })
+  { httpApiStatus: 404 }
 ) {}

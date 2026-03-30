@@ -6,7 +6,7 @@ import {
   type UpdateTodoInputType,
 } from "@starter/api-contract/TodoSchema";
 import { TodoRepository } from "@starter/persistence/Services/TodoRepository";
-import * as HttpApiBuilder from "@effect/platform/HttpApiBuilder";
+import * as HttpApiBuilder from "effect/unstable/httpapi/HttpApiBuilder";
 import * as Effect from "effect/Effect";
 import { pipe } from "effect/Function";
 

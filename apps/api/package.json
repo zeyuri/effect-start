@@ -16,8 +16,7 @@
     "@starter/api-contract": "workspace:*",
     "@starter/persistence": "workspace:*",
     "effect": "catalog:",
-    "@effect/platform": "catalog:",
-    "@effect/platform-bun": "^0.87.0"
+    "@effect/platform-bun": "4.0.0-beta.43"
   },
   "devDependencies": {
     "@starter/vitest-config": "workspace:*",

@@ -1,5 +1,5 @@
-import * as HttpApiEndpoint from "@effect/platform/HttpApiEndpoint";
-import * as HttpApiGroup from "@effect/platform/HttpApiGroup";
+import * as HttpApiEndpoint from "effect/unstable/httpapi/HttpApiEndpoint";
+import * as HttpApiGroup from "effect/unstable/httpapi/HttpApiGroup";
 import * as Schema from "effect/Schema";
 import {
   CreateTodoInput,
@@ -10,28 +10,35 @@ import {
 } from "./TodoSchema.js";
 
 export class TodosApiGroup extends HttpApiGroup.make("todos")
-  .add(HttpApiEndpoint.get("list", "/todos").addSuccess(Schema.Array(Todo)))
   .add(
-    HttpApiEndpoint.get("getById", "/todos/:id")
-      .setPath(Schema.Struct({ id: TodoId }))
-      .addSuccess(Todo)
-      .addError(TodoNotFoundError)
+    HttpApiEndpoint.get("list", "/todos", {
+      success: Schema.Array(Todo),
+    })
   )
   .add(
-    HttpApiEndpoint.post("create", "/todos")
-      .setPayload(CreateTodoInput)
-      .addSuccess(Todo, { status: 201 })
+    HttpApiEndpoint.get("getById", "/todos/:id", {
+      params: { id: TodoId },
+      success: Todo,
+      error: TodoNotFoundError,
+    })
   )
   .add(
-    HttpApiEndpoint.patch("update", "/todos/:id")
-      .setPath(Schema.Struct({ id: TodoId }))
-      .setPayload(UpdateTodoInput)
-      .addSuccess(Todo)
-      .addError(TodoNotFoundError)
+    HttpApiEndpoint.post("create", "/todos", {
+      payload: CreateTodoInput,
+      success: Todo.annotate({ httpApiStatus: 201 }),
+    })
   )
   .add(
-    HttpApiEndpoint.del("remove", "/todos/:id")
-      .setPath(Schema.Struct({ id: TodoId }))
-      .addSuccess(Schema.Void)
-      .addError(TodoNotFoundError)
+    HttpApiEndpoint.patch("update", "/todos/:id", {
+      params: { id: TodoId },
+      payload: UpdateTodoInput,
+      success: Todo,
+      error: TodoNotFoundError,
+    })
+  )
+  .add(
+    HttpApiEndpoint.delete("remove", "/todos/:id", {
+      params: { id: TodoId },
+      error: TodoNotFoundError,
+    })
   ) {}

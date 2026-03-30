@@ -1,5 +1,5 @@
-import * as SqlClient from "@effect/sql/SqlClient";
-import * as SqlSchema from "@effect/sql/SqlSchema";
+import * as SqlClient from "effect/unstable/sql/SqlClient";
+import * as SqlSchema from "effect/unstable/sql/SqlSchema";
 import * as Effect from "effect/Effect";
 import { pipe } from "effect/Function";
 import * as Layer from "effect/Layer";
@@ -27,17 +27,17 @@ const CreateRequest = Schema.Struct({
 });
 
 const todoRowToDomain = (row: TodoRow): Todo =>
-  Todo.make({
-    id: TodoId.make(row.id),
+  new Todo({
+    id: TodoId.makeUnsafe(row.id),
     title: row.title,
     completed: row.completed,
-    createdAt: DateTime.unsafeFromDate(row.created_at),
+    createdAt: DateTime.fromDateUnsafe(row.created_at),
   });
 
 const make = Effect.gen(function* () {
   const sql = yield* SqlClient.SqlClient;
 
-  const findById = SqlSchema.findOne({
+  const findById = SqlSchema.findOneOption({
     Request: FindByIdRequest,
     Result: TodoRow,
     execute: ({ id }) => sql`
@@ -45,7 +45,7 @@ const make = Effect.gen(function* () {
     `,
   });
 
-  const insertOne = SqlSchema.findOne({
+  const insertOne = SqlSchema.findOneOption({
     Request: CreateRequest,
     Result: TodoRow,
     execute: ({ title }) => sql`
@@ -107,7 +107,6 @@ const make = Effect.gen(function* () {
     input: UpdateTodoInput
   ) => {
     const effect = Effect.gen(function* () {
-      // First check it exists
       const maybeRow = yield* findById({ id });
       const existing = yield* Option.match(maybeRow, {
         onNone: () =>
@@ -120,11 +119,12 @@ const make = Effect.gen(function* () {
         onSome: Effect.succeed,
       });
 
-      const newTitle = Option.getOrElse(input.title, () => existing.title);
-      const newCompleted = Option.getOrElse(
-        input.completed,
-        () => existing.completed
-      );
+      const newTitle = input.title !== undefined
+        ? Option.getOrElse(input.title, () => existing.title)
+        : existing.title;
+      const newCompleted = input.completed !== undefined
+        ? Option.getOrElse(input.completed, () => existing.completed)
+        : existing.completed;
 
       const UpdateRequest = Schema.Struct({
         id: Schema.String,
@@ -132,7 +132,7 @@ const make = Effect.gen(function* () {
         completed: Schema.Boolean,
       });
 
-      const updateOne = SqlSchema.findOne({
+      const updateOne = SqlSchema.findOneOption({
         Request: UpdateRequest,
         Result: TodoRow,
         execute: ({ id: todoId, title, completed }) => sql`
@@ -194,4 +194,4 @@ const make = Effect.gen(function* () {
   } satisfies TodoRepositoryService;
 });
 
-export const TodoRepositoryLive = Layer.effect(TodoRepository, make);
+export const TodoRepositoryLive = Layer.effect(TodoRepository)(make);

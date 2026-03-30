@@ -1,4 +1,4 @@
-import * as FetchHttpClient from "@effect/platform/FetchHttpClient";
+import * as FetchHttpClient from "effect/unstable/http/FetchHttpClient";
 import { pipe } from "effect/Function";
 import * as Layer from "effect/Layer";
 import { ApiLive } from "./api";

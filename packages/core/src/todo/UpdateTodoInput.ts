@@ -1,10 +1,13 @@
-import { pipe } from "effect/Function";
 import * as Schema from "effect/Schema";
 
 export const UpdateTodoInput = Schema.Struct({
-  title: Schema.optionalWith(pipe(Schema.String, Schema.minLength(1)), {
-    as: "Option",
-  }),
-  completed: Schema.optionalWith(Schema.Boolean, { as: "Option" }),
+  title: Schema.optionalKey(
+    Schema.OptionFromUndefinedOr(
+      Schema.String.check(Schema.isMinLength(1))
+    )
+  ),
+  completed: Schema.optionalKey(
+    Schema.OptionFromUndefinedOr(Schema.Boolean)
+  ),
 });
 export type UpdateTodoInput = typeof UpdateTodoInput.Type;

@@ -5,7 +5,8 @@ import type { CreateTodoInput } from "@starter/api-contract/TodoSchema";
 import type { TodoId } from "@starter/api-contract/TodoSchema";
 import type { UpdateTodoInput } from "@starter/api-contract/TodoSchema";
 import { serializable } from "~/lib/atom-utils";
-import { Atom, Result } from "@effect-atom/atom-react";
+import * as Atom from "effect/unstable/reactivity/Atom";
+import * as AsyncResult from "effect/unstable/reactivity/AsyncResult";
 import * as Arr from "effect/Array";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
@@ -33,7 +34,7 @@ export const todosAtom = (() => {
     rawAtom,
     serializable({
       key: "@starter/web/todos",
-      schema: Result.Schema({
+      schema: AsyncResult.Schema({
         success: TodosSchema,
       }),
     })
@@ -44,7 +45,7 @@ export const todosAtom = (() => {
       (get) => get(remoteAtom),
       (ctx, update: TodosCacheUpdate) => {
         const current = ctx.get(todosAtom);
-        if (!Result.isSuccess(current)) return;
+        if (!AsyncResult.isSuccess(current)) return;
 
         const nextValue = (() => {
           switch (update._tag) {
@@ -65,7 +66,7 @@ export const todosAtom = (() => {
           }
         })();
 
-        ctx.setSelf(Result.success(nextValue));
+        ctx.setSelf(AsyncResult.success(nextValue));
       },
       (refresh) => {
         refresh(remoteAtom);

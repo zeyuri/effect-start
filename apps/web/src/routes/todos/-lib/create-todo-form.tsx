@@ -1,4 +1,4 @@
-import { useAtomSet } from "@effect-atom/atom-react";
+import { useAtomSet } from "@effect/atom-react";
 import { useState } from "react";
 import { createTodoAtom } from "./atoms";
 

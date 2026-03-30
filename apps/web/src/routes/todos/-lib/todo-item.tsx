@@ -1,4 +1,4 @@
-import { useAtomSet } from "@effect-atom/atom-react";
+import { useAtomSet } from "@effect/atom-react";
 import * as Option from "effect/Option";
 import type { Todo } from "@starter/api-contract/TodoSchema";
 import { updateTodoAtom, deleteTodoAtom } from "./atoms";
