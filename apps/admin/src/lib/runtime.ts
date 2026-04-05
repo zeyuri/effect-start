@@ -37,9 +37,6 @@ export class AdminApiClient extends ServiceMap.Service<
 
 const AdminApiClientLive = Layer.effect(AdminApiClient)(apiClient);
 
-const AppLayer = pipe(
-  AdminApiClientLive,
-  Layer.provide(FetchHttpClient.layer)
-);
+const AppLayer = pipe(AdminApiClientLive, Layer.provide(FetchHttpClient.layer));
 
 export const atomRuntime = Atom.runtime(AppLayer);

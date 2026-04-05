@@ -14,6 +14,7 @@ import { PaymentRepositoryLive } from "./PaymentRepositoryLive.ts";
 import { WebhookEventRepositoryLive } from "./WebhookEventRepositoryLive.ts";
 import { FulfillmentRepositoryLive } from "./FulfillmentRepositoryLive.ts";
 import { ShippingQuoteRepositoryLive } from "./ShippingQuoteRepositoryLive.ts";
+import { TodoRepositoryLive } from "./TodoRepositoryLive.ts";
 
 export const RepositoriesLive = pipe(
   ProductRepositoryLive,
@@ -29,5 +30,6 @@ export const RepositoriesLive = pipe(
   Layer.provideMerge(PaymentRepositoryLive),
   Layer.provideMerge(WebhookEventRepositoryLive),
   Layer.provideMerge(FulfillmentRepositoryLive),
-  Layer.provideMerge(ShippingQuoteRepositoryLive)
+  Layer.provideMerge(ShippingQuoteRepositoryLive),
+  Layer.provideMerge(TodoRepositoryLive)
 );

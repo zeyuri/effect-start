@@ -331,6 +331,6 @@ const make = Effect.gen(function* () {
   } satisfies WebhookEventRepositoryService;
 });
 
-export const WebhookEventRepositoryLive = Layer.effect(
-  WebhookEventRepository,
-)(make);
+export const WebhookEventRepositoryLive = Layer.effect(WebhookEventRepository)(
+  make
+);

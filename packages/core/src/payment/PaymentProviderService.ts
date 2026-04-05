@@ -42,6 +42,4 @@ export interface PaymentProviderServiceShape {
 export class PaymentProviderService extends ServiceMap.Service<
   PaymentProviderService,
   PaymentProviderServiceShape
->()(
-  "@starter/core/payment/PaymentProviderService"
-) {}
+>()("@starter/core/payment/PaymentProviderService") {}

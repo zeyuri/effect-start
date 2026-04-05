@@ -128,5 +128,5 @@ const make = Effect.gen(function* () {
 });
 
 export const DownloadTokenRepositoryLive = Layer.effect(
-  DownloadTokenRepository,
+  DownloadTokenRepository
 )(make);

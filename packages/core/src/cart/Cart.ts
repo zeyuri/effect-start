@@ -16,9 +16,7 @@ export class Cart extends Schema.Class<Cart>("Cart")({
   metadata: Schema.Record(Schema.String, Schema.Unknown),
   items: Schema.optional(CartItemArray).pipe(
     Schema.decodeTo(Schema.toType(CartItemArray), {
-      decode: SchemaGetter.withDefault(
-        (): ReadonlyArray<CartItem> => []
-      ),
+      decode: SchemaGetter.withDefault((): ReadonlyArray<CartItem> => []),
       encode: SchemaGetter.required(),
     })
   ),

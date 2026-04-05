@@ -15,7 +15,7 @@ import { pipe } from "effect/Function";
 import * as Layer from "effect/Layer";
 import { TodosApiLive } from "./todos/TodosApiLive.js";
 
-const ServerLive = Layer.unwrapEffect(
+const ServerLive = Layer.unwrap(
   Effect.gen(function* () {
     const port = yield* pipe("PORT", Config.int, Config.withDefault(3000));
     return BunHttpServer.layer({ port });

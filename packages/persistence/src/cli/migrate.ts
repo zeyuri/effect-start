@@ -19,10 +19,7 @@ const program = Effect.gen(function* () {
 
 const migrationsLayer = Layer.provide(MigrationsLive, PgClientLive);
 
-const appLayer = Layer.provide(
-  Layer.effectDiscard(program),
-  migrationsLayer
-);
+const appLayer = Layer.provide(Layer.effectDiscard(program), migrationsLayer);
 
 // eslint-disable-next-line effect/no-runPromise -- CLI entry point
 void Effect.runPromise(Layer.launch(appLayer));

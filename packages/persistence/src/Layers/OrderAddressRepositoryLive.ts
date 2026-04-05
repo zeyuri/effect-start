@@ -118,6 +118,6 @@ const make = Effect.gen(function* () {
   } satisfies OrderAddressRepositoryService;
 });
 
-export const OrderAddressRepositoryLive = Layer.effect(
-  OrderAddressRepository,
-)(make);
+export const OrderAddressRepositoryLive = Layer.effect(OrderAddressRepository)(
+  make
+);

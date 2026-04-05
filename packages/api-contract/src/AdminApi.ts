@@ -146,13 +146,9 @@ export class AdminApiGroup extends HttpApiGroup.make("admin")
     })
   )
   .add(
-    HttpApiEndpoint.post(
-      "replayWebhookEvent",
-      "/admin/webhooks/:id/replay",
-      {
-        params: { id: Schema.String },
-        success: WebhookReplayResponse,
-        error: [AdminWebhookNotFound, AdminWebhookReplayError],
-      }
-    )
+    HttpApiEndpoint.post("replayWebhookEvent", "/admin/webhooks/:id/replay", {
+      params: { id: Schema.String },
+      success: WebhookReplayResponse,
+      error: [AdminWebhookNotFound, AdminWebhookReplayError],
+    })
   ) {}

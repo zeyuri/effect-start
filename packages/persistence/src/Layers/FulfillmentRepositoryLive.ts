@@ -173,6 +173,6 @@ const make = Effect.gen(function* () {
   } satisfies FulfillmentRepositoryService;
 });
 
-export const FulfillmentRepositoryLive = Layer.effect(
-  FulfillmentRepository,
-)(make);
+export const FulfillmentRepositoryLive = Layer.effect(FulfillmentRepository)(
+  make
+);

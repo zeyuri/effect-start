@@ -51,12 +51,13 @@ const make = Effect.gen(function* () {
       const executeReq = httpClient.execute(withBody);
       const response = yield* pipe(
         executeReq,
-        Effect.mapError((err) =>
-          new EmailProviderError({
-            provider: "resend",
-            code: "NETWORK_ERROR",
-            message: String(err),
-          })
+        Effect.mapError(
+          (err) =>
+            new EmailProviderError({
+              provider: "resend",
+              code: "NETWORK_ERROR",
+              message: String(err),
+            })
         )
       );
 
@@ -72,7 +73,10 @@ const make = Effect.gen(function* () {
         });
       }
 
-      const body = yield* pipe(response.json, Effect.orElseSucceed(() => ({})));
+      const body = yield* pipe(
+        response.json,
+        Effect.orElseSucceed(() => ({}))
+      );
 
       const messageId = extractMessageId(body);
 

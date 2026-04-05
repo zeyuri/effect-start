@@ -28,9 +28,8 @@ const apiClient = Effect.gen(function* () {
 
 type ApiClientShape = Effect.Success<typeof apiClient>;
 
-export class ApiClient extends ServiceMap.Service<
-  ApiClient,
-  ApiClientShape
->()("@starter/web/lib/api-client/ApiClient") {}
+export class ApiClient extends ServiceMap.Service<ApiClient, ApiClientShape>()(
+  "@starter/web/lib/api-client/ApiClient"
+) {}
 
 export const ApiClientLive = Layer.effect(ApiClient)(apiClient);

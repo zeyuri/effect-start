@@ -301,6 +301,6 @@ const make = Effect.gen(function* () {
   } satisfies ShippingProviderServiceShape;
 });
 
-export const MelhorEnvioClientLive = Layer.effect(
-  ShippingProviderService,
-)(make);
+export const MelhorEnvioClientLive = Layer.effect(ShippingProviderService)(
+  make
+);

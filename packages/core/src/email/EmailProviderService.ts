@@ -24,6 +24,4 @@ export interface EmailProviderServiceShape {
 export class EmailProviderService extends ServiceMap.Service<
   EmailProviderService,
   EmailProviderServiceShape
->()(
-  "@starter/core/email/EmailProviderService"
-) {}
+>()("@starter/core/email/EmailProviderService") {}

@@ -150,7 +150,10 @@ const make = Effect.gen(function* () {
     providerId: string
   ): Effect.Effect<PaymentStatusResult, PaymentProviderError> =>
     Effect.gen(function* () {
-      const body = yield* stripeRequest("GET", `/payment_intents/${providerId}`);
+      const body = yield* stripeRequest(
+        "GET",
+        `/payment_intents/${providerId}`
+      );
 
       return {
         status: asStringField(body["status"], "unknown"),

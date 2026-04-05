@@ -71,6 +71,4 @@ export interface ShippingProviderServiceShape {
 export class ShippingProviderService extends ServiceMap.Service<
   ShippingProviderService,
   ShippingProviderServiceShape
->()(
-  "@starter/core/shipping/ShippingProviderService"
-) {}
+>()("@starter/core/shipping/ShippingProviderService") {}

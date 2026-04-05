@@ -92,7 +92,9 @@ const make = Effect.gen(function* () {
              AND is_active = true
            ORDER BY created_at
         `,
-        Effect.flatMap(Schema.decodeUnknownEffect(Schema.Array(ProductVariantRow))),
+        Effect.flatMap(
+          Schema.decodeUnknownEffect(Schema.Array(ProductVariantRow))
+        ),
         wrapSqlError("ProductVariantRepository.listActiveByProductIds")
       );
     };
@@ -253,7 +255,9 @@ const make = Effect.gen(function* () {
       const setClauses = sets.join(", ");
       const query = `UPDATE product_variant SET ${setClauses} WHERE id = $${idIdx} AND is_active = true RETURNING *`;
       const rows = yield* sql.unsafe(query, values);
-      const decode = Schema.decodeUnknownEffect(Schema.Array(ProductVariantRow));
+      const decode = Schema.decodeUnknownEffect(
+        Schema.Array(ProductVariantRow)
+      );
       const parsed = yield* decode(rows);
       if (parsed.length === 0) {
         return yield* Effect.die("Variant not found");
@@ -276,7 +280,9 @@ const make = Effect.gen(function* () {
            AND pv.stock <= ${threshold}
          ORDER BY pv.stock ASC, pv.updated_at DESC
       `;
-      const decode = Schema.decodeUnknownEffect(Schema.Array(ProductVariantRow));
+      const decode = Schema.decodeUnknownEffect(
+        Schema.Array(ProductVariantRow)
+      );
       return yield* decode(rows);
     });
     return pipe(effect, wrapSqlError("ProductVariantRepository.findLowStock"));
@@ -295,5 +301,5 @@ const make = Effect.gen(function* () {
 });
 
 export const ProductVariantRepositoryLive = Layer.effect(
-  ProductVariantRepository,
+  ProductVariantRepository
 )(make);

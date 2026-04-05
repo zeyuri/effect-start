@@ -36,5 +36,5 @@ const make = Effect.gen(function* () {
 });
 
 export const ShippingQuoteRepositoryLive = Layer.effect(
-  ShippingQuoteRepository,
+  ShippingQuoteRepository
 )(make);

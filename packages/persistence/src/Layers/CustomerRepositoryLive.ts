@@ -38,10 +38,10 @@ const customerRowToDomain = (row: CustomerRow): Customer =>
     id: CustomerId.makeUnsafe(row.id),
     email: Email.makeUnsafe(row.email),
     name: row.name,
-    defaultAddressId: row.default_address_id
-      !== null
-      ? AddressId.makeUnsafe(row.default_address_id)
-      : null,
+    defaultAddressId:
+      row.default_address_id !== null
+        ? AddressId.makeUnsafe(row.default_address_id)
+        : null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   });

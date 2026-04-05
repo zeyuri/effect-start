@@ -1,10 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { TodoIdType } from "@starter/api-contract/TodoSchema";
-import {
-  useAtomRefresh,
-  useAtomSet,
-  useAtomValue,
-} from "@effect/atom-react";
+import { useAtomRefresh, useAtomSet, useAtomValue } from "@effect/atom-react";
 import * as AsyncResult from "effect/unstable/reactivity/AsyncResult";
 import * as Exit from "effect/Exit";
 import * as Option from "effect/Option";

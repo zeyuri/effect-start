@@ -58,7 +58,8 @@ const orderRowToDomain = (row: OrderRow): Order => {
   return new Order({
     id: OrderId.makeUnsafe(row.id),
     displayId: row.display_id !== null ? Number(row.display_id) : null,
-    productId: row.product_id !== null ? ProductId.makeUnsafe(row.product_id) : null,
+    productId:
+      row.product_id !== null ? ProductId.makeUnsafe(row.product_id) : null,
     buyerName: row.buyer_name,
     buyerEmail: Email.makeUnsafe(row.buyer_email),
     status:
@@ -314,7 +315,9 @@ const make = Effect.gen(function* () {
         FROM "order"
         WHERE status IN ('paid', 'processing', 'shipped', 'delivered')
       `;
-      const decodeRevenue = Schema.decodeUnknownEffect(Schema.Array(RevenueRow));
+      const decodeRevenue = Schema.decodeUnknownEffect(
+        Schema.Array(RevenueRow)
+      );
       const parsed = yield* decodeRevenue(rows);
       if (parsed.length === 0) {
         return 0;

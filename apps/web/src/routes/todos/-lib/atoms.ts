@@ -66,7 +66,9 @@ export const todosAtom = (() => {
           }
         })();
 
-        ctx.setSelf(AsyncResult.success(nextValue));
+        ctx.setSelf(
+          AsyncResult.success(nextValue) as Atom.Type<typeof remoteAtom>
+        );
       },
       (refresh) => {
         refresh(remoteAtom);

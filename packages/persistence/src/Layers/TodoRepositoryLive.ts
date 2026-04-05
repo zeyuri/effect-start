@@ -119,12 +119,14 @@ const make = Effect.gen(function* () {
         onSome: Effect.succeed,
       });
 
-      const newTitle = input.title !== undefined
-        ? Option.getOrElse(input.title, () => existing.title)
-        : existing.title;
-      const newCompleted = input.completed !== undefined
-        ? Option.getOrElse(input.completed, () => existing.completed)
-        : existing.completed;
+      const newTitle =
+        input.title !== undefined
+          ? Option.getOrElse(input.title, () => existing.title)
+          : existing.title;
+      const newCompleted =
+        input.completed !== undefined
+          ? Option.getOrElse(input.completed, () => existing.completed)
+          : existing.completed;
 
       const UpdateRequest = Schema.Struct({
         id: Schema.String,

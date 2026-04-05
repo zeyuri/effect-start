@@ -55,13 +55,9 @@ export class OrdersApiGroup extends HttpApiGroup.make("orders")
     })
   )
   .add(
-    HttpApiEndpoint.post(
-      "sendConfirmation",
-      "/orders/:id/send-confirmation",
-      {
-        params: { id: OrderId },
-        success: ConfirmationSent,
-        error: OrderNotFound,
-      }
-    )
+    HttpApiEndpoint.post("sendConfirmation", "/orders/:id/send-confirmation", {
+      params: { id: OrderId },
+      success: ConfirmationSent,
+      error: OrderNotFound,
+    })
   ) {}

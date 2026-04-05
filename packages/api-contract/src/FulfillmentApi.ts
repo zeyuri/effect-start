@@ -12,26 +12,18 @@ import {
 
 export class FulfillmentApiGroup extends HttpApiGroup.make("fulfillment")
   .add(
-    HttpApiEndpoint.get(
-      "getByOrderId",
-      "/admin/fulfillments/:orderId",
-      {
-        params: { orderId: OrderId },
-        success: FulfillmentListResponse,
-      }
-    )
+    HttpApiEndpoint.get("getByOrderId", "/admin/fulfillments/:orderId", {
+      params: { orderId: OrderId },
+      success: FulfillmentListResponse,
+    })
   )
   .add(
-    HttpApiEndpoint.post(
-      "ship",
-      "/admin/fulfillments/:fulfillmentId/ship",
-      {
-        params: { fulfillmentId: Schema.String },
-        payload: ShipFulfillmentPayload,
-        success: FulfillmentResponse,
-        error: [FulfillmentNotFound, FulfillmentOperationError],
-      }
-    )
+    HttpApiEndpoint.post("ship", "/admin/fulfillments/:fulfillmentId/ship", {
+      params: { fulfillmentId: Schema.String },
+      payload: ShipFulfillmentPayload,
+      success: FulfillmentResponse,
+      error: [FulfillmentNotFound, FulfillmentOperationError],
+    })
   )
   .add(
     HttpApiEndpoint.post(

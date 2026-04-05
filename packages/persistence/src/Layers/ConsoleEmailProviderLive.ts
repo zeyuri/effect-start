@@ -10,12 +10,10 @@ const make = Effect.succeed({
   sendEmail: (_input) =>
     Effect.sync(() => {
       const messageId =
-        `console-${Date.now()}-` +
-        `${Math.random().toString(36).slice(2, 8)}`;
+        `console-${Date.now()}-` + `${Math.random().toString(36).slice(2, 8)}`;
       return { messageId, provider: "console" };
     }),
 } satisfies EmailProviderServiceShape);
 
-export const ConsoleEmailProviderLive = Layer.effect(
-  EmailProviderService,
-)(make);
+export const ConsoleEmailProviderLive =
+  Layer.effect(EmailProviderService)(make);
